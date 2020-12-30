@@ -1,5 +1,5 @@
 name: flutter_time_ago
-description: A new Flutter package to format date or timestamp in seconds ago, minutes ago, hours ago, days ago and from now.
+description: A new Flutter package to format datetime or milliseconds in seconds ago, minutes ago, hours ago, days ago and from now.
 version: 0.0.1
 homepage: https://github.com/wesleytoshio/flutter_time_ago
 
