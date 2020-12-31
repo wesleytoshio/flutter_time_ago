@@ -34,12 +34,6 @@ class PtBrLocale implements LocaleMessagesInterface {
 
   @override
   List<String> years() => ['ano', 'anos'];
-
-  @override
-  prefixTimeValue(bool isPast) => isPast ? prefixAgo() : prefixFromNow();
-
-  @override
-  suffixTimeValue(bool isPast) => isPast ? suffixAgo() : suffixFromNow();
 }
 
 /// [Portuguese-Brazil] Interface for short language
@@ -76,10 +70,4 @@ class PtBrShortLocale implements LocaleMessagesInterface {
 
   @override
   List<String> years() => ['ano', 'anos'];
-
-  @override
-  prefixTimeValue(bool isPast) => isPast ? prefixAgo() : prefixFromNow();
-
-  @override
-  suffixTimeValue(bool isPast) => isPast ? suffixAgo() : suffixFromNow();
 }

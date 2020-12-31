@@ -32,6 +32,10 @@ class FlutterTimeAgo {
     _suffixEnabled = suffixEnabled;
   }
 
+  static setCustomLocale(
+          Map<String, LocaleMessagesInterface> customLocaleMessage) =>
+      _localesMessageMap.addEntries(customLocaleMessage.entries);
+
   /// if the value is in milliseconds ex: [1605985200000]
   ///
   /// the runtimeType must be an [int]
@@ -79,13 +83,15 @@ class FlutterTimeAgo {
   static String _displayTimeByValue(int seconds, dynamic time, bool isPast,
       String lang, bool prefixEnabled, bool suffixEnabled) {
     try {
-      if (seconds < 60) return _localesMessageMap[lang].lessThanOneMinute();
+      var _localeMessage = _localesMessageMap[lang];
+      if (seconds < 60) return _localeMessage.lessThanOneMinute();
       int _timeValue = (seconds / time[2]).round();
       int _displayIndex = _timeValue > 1 ? 1 : 0;
+
       String _prefixText =
-          prefixEnabled ? _localesMessageMap[lang].prefixTimeValue(isPast) : '';
+          prefixEnabled ? _prefixTimeValue(isPast, _localeMessage) : '';
       String _suffixText =
-          suffixEnabled ? _localesMessageMap[lang].suffixTimeValue(isPast) : '';
+          suffixEnabled ? _suffixTimeValue(isPast, _localeMessage) : '';
       return _displayText(
           _prefixText, _timeValue, time[1][_displayIndex], _suffixText);
     } catch (e) {
@@ -111,4 +117,12 @@ class FlutterTimeAgo {
       [2903040000, _localesMessageMap[locale].years(), 29030400],
     ];
   }
+
+  /// returns a [prefix] function according to time [past] or [Future]
+  static _prefixTimeValue(bool isPast, LocaleMessagesInterface localeMessage) =>
+      isPast ? localeMessage.prefixAgo() : localeMessage.prefixFromNow();
+
+  /// returns a [prefix] function according to time [past] or [Future]
+  static _suffixTimeValue(bool isPast, LocaleMessagesInterface localeMessage) =>
+      isPast ? localeMessage.suffixAgo() : localeMessage.suffixFromNow();
 }

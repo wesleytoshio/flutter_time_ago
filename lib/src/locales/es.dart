@@ -34,12 +34,6 @@ class EsLocale implements LocaleMessagesInterface {
 
   @override
   List<String> years() => ['año', 'años'];
-
-  @override
-  prefixTimeValue(bool isPast) => isPast ? prefixAgo() : prefixFromNow();
-
-  @override
-  suffixTimeValue(bool isPast) => isPast ? suffixAgo() : suffixFromNow();
 }
 
 /// [Spanish] Interface for short language
@@ -76,10 +70,4 @@ class EsShortLocale implements LocaleMessagesInterface {
 
   @override
   List<String> years() => ['año', 'años'];
-
-  @override
-  prefixTimeValue(bool isPast) => isPast ? prefixAgo() : prefixFromNow();
-
-  @override
-  suffixTimeValue(bool isPast) => isPast ? suffixAgo() : suffixFromNow();
 }

@@ -1,3 +1,4 @@
+import 'package:example/custom_locale.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_time_ago/flutter_time_ago.dart';
 
@@ -38,6 +39,8 @@ class _HomeViewState extends State<HomeView> {
     'en_short',
     'es',
     'es_short',
+    'fr',
+    'fr_short',
   ];
 
   @override
@@ -87,6 +90,8 @@ class _HomeViewState extends State<HomeView> {
       1608034642938,
       1605985200000
     ];
+    FlutterTimeAgo.setCustomLocale(
+        {'fr': CustomLocale(), 'fr_short': CustomShortLocale()});
     super.initState();
   }
 
@@ -171,6 +176,18 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ),
               ),
+              OutlineButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => TestPage(
+                              items: _timesToString,
+                            )),
+                  );
+                },
+                child: Text('Go Page Now'),
+              )
             ],
           ),
         ),
