@@ -5,9 +5,10 @@ final now = new DateTime.now();
 
 void main() {
   group('[FlutterTimeAgo] pt_BR', () {
-    test('Agora', () async {
+    test('agora', () async {
       final clock = now;
-      var result = FlutterTimeAgo.parse(clock.toString());
+      var result = FlutterTimeAgo.parse(clock.toString(), lang: 'en');
+      print('result $result');
       expect(result, equals('agora'));
     });
 

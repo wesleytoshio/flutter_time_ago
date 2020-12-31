@@ -35,10 +35,16 @@ class FlutterTimeAgo {
   /// if the value is in milliseconds ex: [1605985200000]
   ///
   /// the runtimeType must be an [int]
-  static String parse(date) {
+  static String parse(date,
+      {String lang, bool prefixEnabled, bool suffixEnabled}) {
     DateTime now = DateTime.now();
+
     return _timeTextByValue(
-        _parseByRuntimeType(date).difference(now).inSeconds);
+      _parseByRuntimeType(date).difference(now).inSeconds,
+      lang: lang,
+      prefixEnabled: prefixEnabled,
+      suffixEnabled: suffixEnabled,
+    );
   }
 
   /// switch of runtimeType giving the possibility
@@ -56,24 +62,30 @@ class FlutterTimeAgo {
     }
   }
 
-  static String _timeTextByValue(seconds) {
+  static String _timeTextByValue(seconds,
+      {String lang, bool prefixEnabled, bool suffixEnabled}) {
     int position = (seconds < 0) ? 2 : 1;
-    List<Object> _time = timeFormats(_default)
-        .firstWhere((element) => seconds.abs() < element[0]);
-    return _displayTimeByValue(seconds.abs(), _time, position == 2);
+    String _lang = lang != null ? lang : _default;
+    bool __prefixEnabled =
+        prefixEnabled != null ? prefixEnabled : _prefixEnabled;
+    bool __suffixEnabled =
+        suffixEnabled != null ? suffixEnabled : _suffixEnabled;
+    List<Object> _time =
+        timeFormats(_lang).firstWhere((element) => seconds.abs() < element[0]);
+    return _displayTimeByValue(seconds.abs(), _time, position == 2, _lang,
+        __prefixEnabled, __suffixEnabled);
   }
 
-  static String _displayTimeByValue(int seconds, dynamic time, isPast) {
+  static String _displayTimeByValue(int seconds, dynamic time, bool isPast,
+      String lang, bool prefixEnabled, bool suffixEnabled) {
     try {
-      if (seconds < 60) return _localesMessageMap[_default].lessThanOneMinute();
+      if (seconds < 60) return _localesMessageMap[lang].lessThanOneMinute();
       int _timeValue = (seconds / time[2]).round();
       int _displayIndex = _timeValue > 1 ? 1 : 0;
-      String _prefixText = _prefixEnabled
-          ? _localesMessageMap[_default].prefixTimeValue(isPast)
-          : '';
-      String _suffixText = _suffixEnabled
-          ? _localesMessageMap[_default].suffixTimeValue(isPast)
-          : '';
+      String _prefixText =
+          prefixEnabled ? _localesMessageMap[lang].prefixTimeValue(isPast) : '';
+      String _suffixText =
+          suffixEnabled ? _localesMessageMap[lang].suffixTimeValue(isPast) : '';
       return _displayText(
           _prefixText, _timeValue, time[1][_displayIndex], _suffixText);
     } catch (e) {

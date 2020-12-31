@@ -3,7 +3,7 @@ import 'locale_messages_interface.dart';
 /// [Spanish] Interface language
 class EsLocale implements LocaleMessagesInterface {
   @override
-  String lessThanOneMinute() => 'un momento';
+  String lessThanOneMinute() => 'ahora';
 
   @override
   String prefixAgo() => 'hace';
