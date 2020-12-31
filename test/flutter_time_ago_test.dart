@@ -4,12 +4,11 @@ import 'package:flutter_time_ago/src/flutter_time_ago.dart';
 final now = new DateTime.now();
 
 void main() {
-  group('[FlutterTimeAgo] pt_BR', () {
-    test('agora', () async {
+  group('[FlutterTimeAgo]', () {
+    test('a moment [test with language set]', () async {
       final clock = now;
       var result = FlutterTimeAgo.parse(clock.toString(), lang: 'en');
-      print('result $result');
-      expect(result, equals('agora'));
+      expect(result, equals('a moment'));
     });
 
     test('há 5 minutos', () async {
