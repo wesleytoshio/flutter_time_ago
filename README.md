@@ -36,7 +36,15 @@ import 'package:flutter_time_ago/flutter_time_ago.dart';
 @override
   void initState() {
     super.initState();
-     FlutterTimeAgo.setConfig('pt_BR');
+     FlutterTimeAgo.setConfig(
+     'pt_BR',
+     /// Remove a prefix text ex: [in] 2 minutes
+     /// Default is [true]
+     prefixEnabled:false,
+     /// Remove a suffix text ex: 2 minutes [ago]
+     /// Default is [true]
+     suffixEnabled:false,
+     );
   }
 ```
 
@@ -45,9 +53,45 @@ import 'package:flutter_time_ago/flutter_time_ago.dart';
 if your language is not supported, you can create your own, just create a class that implements LocaleMessagesInterface
 
 ```dart
-import 'locale_messages_interface.dart';
+import 'package:flutter_time_ago/flutter_time_ago.dart';
 
 class CustomLocale implements LocaleMessagesInterface {...}
+```
+
+### how to you set custom language?
+
+```dart
+@override
+  void initState() {
+    super.initState();
+     FlutterTimeAgo.setCustomLocale(
+        {'fr': CustomLocale(), 'fr_short': CustomShortLocale()}
+        );
+  }
+```
+
+### Using FlutterTimeAgoWidget
+
+A widget that rebuilds itself every 1 minute in periods to update the time on the screen
+
+```dart
+@override
+ Widget build(BuildContext context) {
+ return FlutterTimeAgoWidget(
+        date: 1605985200000,
+        /// Remove a prefix text ex: [in] 2 minutes
+        /// Default is [true]
+        prefixEnabled:false,
+        /// Remove a suffix text ex: 2 minutes [ago]
+        /// Default is [true]
+        suffixEnabled:false,
+        textAlign: TextAlign.center,
+        textStyle: TextStyle(
+        color: Colors.grey,
+        fontWeight: FontWeight.w600,
+          ),
+        );
+ }
 ```
 
 don't forget to look at our example application in the /example folder\
