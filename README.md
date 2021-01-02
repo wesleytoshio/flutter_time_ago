@@ -41,7 +41,7 @@ import 'package:flutter_time_ago/flutter_time_ago.dart';
      /// Remove a prefix text ex: [in] 2 minutes
      /// Default is [true]
      prefixEnabled:false,
-     /// Remove a suffix text ex: 2 minutes [ago]
+     /// Remove a suffix text ex: 2 minutes [ago] or [from now]
      /// Default is [true]
      suffixEnabled:false,
      );
@@ -82,7 +82,7 @@ A widget that rebuilds itself every 1 minute in periods to update the time on th
         /// Remove a prefix text ex: [in] 2 minutes
         /// Default is [true]
         prefixEnabled:false,
-        /// Remove a suffix text ex: 2 minutes [ago]
+        /// Remove a suffix text ex: 2 minutes [ago] or [from now]
         /// Default is [true]
         suffixEnabled:false,
         textAlign: TextAlign.center,
